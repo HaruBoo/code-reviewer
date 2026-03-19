@@ -4,6 +4,7 @@ import java.net.http.HttpResponse;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -24,12 +25,37 @@ public class Main {
         String input = Files.readString(filePath);
 
         input = input.replace("\\", "\\\\")
-                     .replace("\"", "\\\"")
-                     .replace("\n", "\\n")
-                     .replace("\r", "\\r")
-                     .replace("\t", "\\t");
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r")
+                .replace("\t", "\\t");
 
         System.out.println("📂 読み込んだファイル：" + args[0]);
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\nレビュー観点を選んでください：");
+        System.out.println("1. 総合レビュー");
+        System.out.println("2. セキュリティ");
+        System.out.println("3. パフォーマンス");
+        System.out.println("4. 可読性・命名規則");
+        System.out.print("番号を入力：");
+
+        String choice = scanner.nextLine();
+
+        String reviewPrompt;
+
+        if (choice.equals("1")) {
+            reviewPrompt = "以下のJavaコードを総合的にレビューしてください。改善点を日本語で教えてください：\\n";
+        } else if (choice.equals("2")) {
+            reviewPrompt = "以下のJavaコードをセキュリティの観点でレビューしてください。脆弱性や危険な箇所を日本語で教えてください：\\n";
+        } else if (choice.equals("3")) {
+            reviewPrompt = "以下のJavaコードをパフォーマンスの観点でレビューしてください。処理速度やメモリ効率の改善点を日本語で教えてください：\\n";
+        } else if (choice.equals("4")) {
+            reviewPrompt = "以下のJavaコードの可読性と命名規則をレビューしてください。変数名やコード構造の改善点を日本語で教えてください：\\n";
+        } else {
+            reviewPrompt = "以下のJavaコードを総合的にレビューしてください。改善点を日本語で教えてください：\\n";
+        }
 
         String apiKey = System.getenv("ANTHROPIC_API_KEY");
 
@@ -46,11 +72,11 @@ public class Main {
                     "messages": [
                         {
                             "role": "user",
-                            "content": "以下のJavaコードをレビューしてください。改善点を日本語で教えてください：\\n%s"
+                            "content": "%s%s"
                         }
                     ]
                 }
-                """.formatted(input);
+                """.formatted(reviewPrompt, input);
 
         HttpClient client = HttpClient.newHttpClient();
 
@@ -79,6 +105,8 @@ public class Main {
 
         System.out.println("\n📝 レビュー結果：");
         System.out.println(reviewText);
-        
+
+        scanner.close();
+
     }
 }
