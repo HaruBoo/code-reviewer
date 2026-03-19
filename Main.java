@@ -8,7 +8,20 @@ import java.nio.file.Path;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        String input = Files.readString(Path.of(args[0]));
+        if (args.length == 0) {
+            System.out.println("使い方：java Main.java <ファイル名>");
+            System.out.println("例：java Main.java Sample.java");
+            return;
+        }
+
+        Path filePath = Path.of(args[0]);
+
+        if (!Files.exists(filePath)) {
+            System.out.println("❌ ファイルが見つかりません：" + args[0]);
+            return;
+        }
+
+        String input = Files.readString(filePath);
 
         input = input.replace("\\", "\\\\")
                      .replace("\"", "\\\"")
@@ -19,6 +32,12 @@ public class Main {
         System.out.println("📂 読み込んだファイル：" + args[0]);
 
         String apiKey = System.getenv("ANTHROPIC_API_KEY");
+
+        if (apiKey == null) {
+            System.out.println("❌ APIキーが設定されていません");
+            System.out.println("export ANTHROPIC_API_KEY=\"your-key\" を実行してください");
+            return;
+        }
 
         String jsonBody = """
                 {
