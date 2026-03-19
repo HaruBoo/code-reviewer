@@ -1,6 +1,6 @@
 # Code Reviewer - AIコードレビューCLIツール
 
-> [English version here](README.md)
+> [English](README.md)
 
 # Code Reviewer - AIコードレビューCLIツール
 
