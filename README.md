@@ -1,5 +1,4 @@
 #### 日本語版
-
 [日本語](README.ja.md)
 
 # Code Reviewer - AI Code Review CLI Tool

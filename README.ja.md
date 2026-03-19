@@ -1,5 +1,4 @@
-# Code Reviewer - AIコードレビューCLIツール
-
+### English ver.
 > [English](README.md)
 
 # Code Reviewer - AIコードレビューCLIツール
