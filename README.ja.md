@@ -1,4 +1,4 @@
-### English ver.
+#### English ver.
 > [English](README.md)
 
 # Code Reviewer - AIコードレビューCLIツール
