@@ -1,3 +1,7 @@
+## 日本語版
+
+[日本語の README はこちら](README.ja.md)
+
 # Code Reviewer - AI Code Review CLI Tool
 
 A CLI tool that automatically reviews Java code using the Claude API.
@@ -55,7 +59,3 @@ export ANTHROPIC_API_KEY="your-api-key"
 - REST API fundamentals (request/response)
 - JSON parsing and string manipulation
 - CLI tool design (argument handling, error handling)
-
-## 日本語版
-
-[日本語の README はこちら](README.ja.md)
