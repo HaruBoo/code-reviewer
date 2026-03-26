@@ -1,60 +1,44 @@
-#### English ver.
-> [English](README.md)
+[English](README.md)
 
-# Code Reviewer - AIコードレビューCLIツール
+# code-reviewer
 
-JavaからClaude APIを使って、Javaコードを自動レビューするCLIツールです。
+> AIコードレビューCLIツール — code-reviewerシリーズの原点
+
+## 概要
+
+code-reviewerシリーズの第一作。Javaの標準ライブラリのみで実装 — Anthropic SDK以外のフレームワーク・依存関係ゼロ。
+
+このプロジェクトはその後、[code-reviewer-py](https://github.com/HaruBoo/code-reviewer-py)（Python + FastAPI + React）へと発展した。
 
 ## 機能
 
-- Javaファイルを指定してAIによるコードレビューを実行
-- 4つのレビュー観点から選択可能（総合 / セキュリティ / パフォーマンス / 可読性・命名規則）
-- レビュー結果をターミナルに表示
+- 4つのレビュー観点：総合 / セキュリティ / パフォーマンス / 可読性
+- コマンドライン引数によるファイル読み込み
+- エラーハンドリング：引数なし・ファイル未存在・APIエラー
+- Anthropic SDK以外の依存関係ゼロ
 
 ## 使い方
-```
-java Main.java <レビュー対象のファイル>
-```
-
-### 例
-```
-$ java Main.java Sample.java
-
-📂 読み込んだファイル：Sample.java
-
-レビュー観点を選んでください：
-1. 総合レビュー
-2. セキュリティ
-3. パフォーマンス
-4. 可読性・命名規則
-番号を入力：1
-
-🔍 レビュー中...
-
-📝 レビュー結果：
-（AIによるレビュー結果が表示されます）
-```
-
-## セットアップ
-
-### 必要なもの
-
-- Java 21以上
-- Anthropic APIキー
-
-### APIキーの設定
 ```bash
-export ANTHROPIC_API_KEY="your-api-key"
+java Main <レビュー対象ファイル> [レビュー観点]
+
+# 例
+java Main Sample.java security
 ```
 
 ## 技術スタック
 
-- Java（HttpClient, Files API）
-- Anthropic Claude API（claude-sonnet-4-20250514）
+- Java 21
+- Anthropic Claude API
+- 標準ライブラリのみ（HttpClient、Files API）
 
-## 学んだこと
+## なぜこれが重要か
 
-- JavaによるHTTP通信（HttpClient）
-- REST APIの基本（リクエスト/レスポンス）
-- JSONの解析と文字列操作
-- CLIツールの設計（引数処理、エラーハンドリング）
+フレームワークなしで純粋なJavaでHTTP通信・JSONパース・ファイルI/Oを実装することで、フレームワークが抽象化している基礎を理解していることを示している。
+
+## 関連プロジェクト
+
+- [code-reviewer-py](https://github.com/HaruBoo/code-reviewer-py) — Python + FastAPI + React への発展版
+
+## 作者
+
+[HaruBoo](https://github.com/HaruBoo) — 東京在住、AIエンジニア志望。Claude APIを使った開発ツールを作っています。
